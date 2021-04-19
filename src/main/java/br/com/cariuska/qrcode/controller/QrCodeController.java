@@ -18,7 +18,7 @@ public class QrCodeController {
 
     @RequestMapping(value = "createQrCodeImage", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> createQrCodeImage(String contents) {
+    public ResponseEntity<?> createQrCodeImage(String contents) {
         try {
 
             HttpHeaders headers = new HttpHeaders();
@@ -34,19 +34,36 @@ public class QrCodeController {
         } catch (Exception e) {
             log.error("Create QR code picture abnormal" + e.getMessage());
             e.printStackTrace();
-            return null;
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+            Result result = Result.error("Create QR code picture abnormal");
+            ResponseEntity<Result> responseEntity = new ResponseEntity<>(result, headers, HttpStatus.BAD_REQUEST);
+            return responseEntity;
         }
     }
 
     @RequestMapping(value = "createQrCode", method = RequestMethod.GET)
     @ResponseBody
-    public Result createQrCode(String contents) {
+    public ResponseEntity<?> createQrCode(String contents) {
         try {
-            return qrCodeService.createQrCode(contents);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+            Result result = qrCodeService.createQrCode(contents);
+            ResponseEntity<Result> responseEntity = new ResponseEntity<>(result, headers, HttpStatus.BAD_REQUEST);
+
+            return responseEntity;
+
         } catch (Exception e) {
             log.error("Create QR code picture abnormal" + e.getMessage());
             e.printStackTrace();
-            return Result.error("Create QR code picture abnormal");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+            Result result = Result.error("Create QR code picture abnormal");
+            ResponseEntity<Result> responseEntity = new ResponseEntity<>(result, headers, HttpStatus.BAD_REQUEST);
+            return responseEntity;
         }
     }
 }

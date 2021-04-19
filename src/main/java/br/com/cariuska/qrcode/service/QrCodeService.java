@@ -1,7 +1,6 @@
 package br.com.cariuska.qrcode.service;
 
-import br.com.cariuska.qrcode.date20191125.QRCodeUtil;
-import br.com.cariuska.qrcode.util.FileUtil;
+import br.com.cariuska.qrcode.util.QRCodeUtil;
 import br.com.cariuska.qrcode.util.Result;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +12,9 @@ import java.util.Map;
 public class QrCodeService {
 
     public byte[] createQrCodeImage(String contents) throws IOException {
-        String pathImages = FileUtil.pathFormat(FileUtil.getPathImages());
-
-        String logo = pathImages  + "/hashiqi_1.jpg";
         byte[] bytes = null;
         try {
-            bytes = QRCodeUtil.encode(contents, null, "d:/EWM", true);
+            bytes = QRCodeUtil.encode(contents);
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
@@ -27,12 +23,9 @@ public class QrCodeService {
     }
 
     public Result createQrCode(String contents) throws IOException {
-        String pathImages = FileUtil.pathFormat(FileUtil.getPathImages());
-
-        String logo = pathImages  + "/hashiqi_1.jpg";
         byte[] bytes = null;
         try {
-            bytes = QRCodeUtil.encode(contents, null, "d:/EWM", true);
+            bytes = QRCodeUtil.encode(contents);
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
