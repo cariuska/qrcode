@@ -12,7 +12,8 @@
 	<artifactId>qrcode</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>qrcode</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Project QRCode</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -71,13 +72,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.2</version>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<repository>cariuska/${project.artifactId}-app</repository>
 				</configuration>
 			</plugin>
 		</plugins>
